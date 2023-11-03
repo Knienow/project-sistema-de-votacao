@@ -34,11 +34,31 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
 
   @Override
   public void votar(String cpfPessoaEleitora, int numeroPessoaCandidata) {
-    throw new UnsupportedOperationException("Unimplemented method 'votar'");
+    if (cpfsComputados.contains(cpfPessoaEleitora)) {
+      System.out.println("Pessoa eleitora já votou!");
+    }
+    for (PessoaCandidata pessoaCandidata : pessoasCandidatas) {
+      if (pessoaCandidata.getNumero() == numeroPessoaCandidata) {
+        pessoaCandidata.receberVoto();
+      }
+    }
+    cpfsComputados.add(cpfPessoaEleitora);
   }
 
   @Override
   public void mostrarResultado() {
-    throw new UnsupportedOperationException("Unimplemented method 'mostrarResultado'");
+    if (cpfsComputados.isEmpty()) {
+      System.out.println("É preciso ter pelo menos um voto para mostrar o resultado.");
+    }
+    int totalVotos = cpfsComputados.size();
+    int porcentagemVotos;
+
+    for (PessoaCandidata pessoaCandidata : pessoasCandidatas) {
+      porcentagemVotos = ((pessoaCandidata.getVotos()) * 100) / totalVotos;
+      System.out.println("Nome: " + pessoaCandidata.getNome() 
+          + " - " + pessoaCandidata.getVotos() + " votos " + " ( " + porcentagemVotos + "% )");
+    }
+    System.out.println("Total de votos: " + totalVotos);
+
   }
 }
