@@ -32,6 +32,7 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
     pessoasEleitoras.add(eleitora);
   }
 
+  /** Método para cadastrar votos. */
   @Override
   public void votar(String cpfPessoaEleitora, int numeroPessoaCandidata) {
     if (cpfsComputados.contains(cpfPessoaEleitora)) {
@@ -45,20 +46,21 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
     cpfsComputados.add(cpfPessoaEleitora);
   }
 
+  /** Método para calcular o resultado da votação. */
   @Override
   public void mostrarResultado() {
     if (cpfsComputados.isEmpty()) {
       System.out.println("É preciso ter pelo menos um voto para mostrar o resultado.");
     }
 
+    int totalVotos = cpfsComputados.size();
     for (PessoaCandidata pessoaCandidata : pessoasCandidatas) {
-      double porcentagemVotos = (double) (pessoaCandidata.getVotos() * 100) / cpfsComputados.size();
-      System.out.println("Nome: " 
-          + pessoaCandidata.getNome() 
-          + " - " + pessoaCandidata.getVotos() 
-          + " votos " + " ( " + Math.round(porcentagemVotos) + "% )"
+      System.out.printf("Nome: %s - %d votos ( %d%% )%n",
+          pessoaCandidata.getNome(), 
+          pessoaCandidata.getVotos(),
+          Math.round((float) pessoaCandidata.getVotos() / totalVotos * 100)
       );
     }
-    System.out.println("Total de votos: " + cpfsComputados.size());
+    System.out.printf("Total de votos: %d%n", totalVotos);
   }
 }

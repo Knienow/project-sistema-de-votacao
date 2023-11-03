@@ -7,7 +7,7 @@ public class PessoaCandidata extends Pessoa {
 
   /** Construtor da classe PessoaCandidata. */
   public PessoaCandidata(String nome, int numero) {
-    this.nome = nome;
+    this.setNome(nome);
     this.numero = numero;
     this.votos = 0;
   }

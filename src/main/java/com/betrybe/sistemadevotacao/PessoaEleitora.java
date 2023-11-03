@@ -6,8 +6,8 @@ public class PessoaEleitora extends Pessoa {
   
   /** Construtor da classe PessoaEleitora. */
   public PessoaEleitora(String nome, String cpf) {
-    this.nome = nome;
-    this.cpf = cpf;
+    this.setNome(nome);
+    this.setCpf(cpf);
   }
 
   public String getCpf() {
